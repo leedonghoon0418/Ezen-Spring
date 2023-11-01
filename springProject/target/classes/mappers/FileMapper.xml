@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.myweb.www.repository.FileDAO">
+  	<insert id="insertFile">
+  		insert into file(uuid, save_dir, file_name, file_type, bno, file_size)
+  		values(#{uuid},#{saveDir},#{fileName},#{fileType},#{bno},#{fileSize})
+  	</insert>
+  	
+  	<select id="getImage" resultType="com.myweb.www.domain.FileVO">
+  		select * from where uuid = #{uuid}
+  	</select>
+  	
+  	<select id="getFileList" resultType="com.myweb.www.domain.FileVO">
+  		select * from file where bno = #{bno}
+  	</select>
+  	
+  	<delete id="fileRemove">
+  		delete from file where uuid = #{uuid}
+  	</delete>
+  	
+  	<insert id="updateFile">
+  		insert into file(uuid, save_dir, file_name, file_type, bno, file_size)
+  		values(#{uuid},#{saveDir},#{fileName},#{fileType},#{bno},#{fileSize})
+  	</insert>
+  	
+  	<update id="getFileCount">
+  		update board b set has_file = (select count(*) from file where bno = b.bno)
+  	</update>
+  	
+  	<delete id="removeDetailFile">
+  		delete from file where bno = #{bno}
+  	</delete>
+  	
+  	<select id="selectListAllFiles" resultType="com.myweb.www.domain.FileVO">
+  		select * from file 
+  	</select>
+  	
+  </mapper>
